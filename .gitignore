@@ -1,3 +1,5 @@
 *.txt
 *.obj
 *.exe
+*.asm
+syscallExample/
