@@ -1,7 +1,7 @@
 # Artemis
 Artemis - C++ Hell's Gate Syscall Extractor
 
-[example](images/Animation.gif)
+![example](/images/Animation.gif)
 
 I used the `cl` compiler for Visual Studio and accessed it through the **x64 Native Tools Command Prompt**  
 **To Compile & Run:**  
