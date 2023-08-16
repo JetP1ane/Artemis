@@ -2,7 +2,7 @@
 Artemis - C++ Hell's Gate Syscall Extractor  
 
   
-[**Blog Post**](https://labs.en1gma.co/malwaredevelopment/evasion/security/2023/08/05/syscalls.html)
+[**Blog Post**](https://labs.en1gma.co/malwaredevelopment/evasion/security/2023/08/14/syscalls.html)
 
 ![example](/images/Animation.gif)
 
